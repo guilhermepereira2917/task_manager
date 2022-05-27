@@ -10,7 +10,7 @@ import javax.swing.table.DefaultTableModel;
 public class JFrame extends javax.swing.JFrame {
 
     FrameGuia frameGuia;
-    
+
     public JFrame() {
         initComponents();
 
@@ -28,9 +28,9 @@ public class JFrame extends javax.swing.JFrame {
                 }
             }
         }.start();
-        
+
         frameGuia = new FrameGuia(this);
-        
+
     }
 
     public synchronized void atualizar() {
@@ -56,8 +56,8 @@ public class JFrame extends javax.swing.JFrame {
 
         popupProcesso = new javax.swing.JPopupMenu();
         menuEncerrar = new javax.swing.JMenuItem();
+        buttonAtualizar1 = new javax.swing.JButton();
         buttonAtualizar = new javax.swing.JButton();
-        panel = new javax.swing.JPanel();
         scroll = new javax.swing.JScrollPane();
         tabela = new javax.swing.JTable();
         barraDeMenu = new javax.swing.JMenuBar();
@@ -73,6 +73,15 @@ public class JFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gerenciador de Processos");
+        setBackground(new java.awt.Color(51, 51, 51));
+        setForeground(new java.awt.Color(255, 255, 255));
+
+        buttonAtualizar1.setText("Encerrar");
+        buttonAtualizar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonAtualizar1ActionPerformed(evt);
+            }
+        });
 
         buttonAtualizar.setText("Atualizar");
         buttonAtualizar.addActionListener(new java.awt.event.ActionListener() {
@@ -1096,25 +1105,14 @@ public class JFrame extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tabela.setShowGrid(false);
+        tabela.setShowVerticalLines(true);
         tabela.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tabelaMouseClicked(evt);
             }
         });
         scroll.setViewportView(tabela);
-
-        javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
-        panel.setLayout(panelLayout);
-        panelLayout.setHorizontalGroup(
-            panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(scroll, javax.swing.GroupLayout.DEFAULT_SIZE, 620, Short.MAX_VALUE)
-        );
-        panelLayout.setVerticalGroup(
-            panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelLayout.createSequentialGroup()
-                .addComponent(scroll, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
 
         menuAjuda.setText("Ajuda");
         menuAjuda.addMenuListener(new javax.swing.event.MenuListener() {
@@ -1137,19 +1135,23 @@ public class JFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(scroll, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 620, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(buttonAtualizar))
-                    .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(buttonAtualizar1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(buttonAtualizar)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(scroll, javax.swing.GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(buttonAtualizar)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(buttonAtualizar)
+                    .addComponent(buttonAtualizar1))
                 .addContainerGap())
         );
 
@@ -1176,6 +1178,16 @@ public class JFrame extends javax.swing.JFrame {
     private void menuAjudaMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_menuAjudaMenuSelected
         frameGuia.trocarPagina("ajuda.html");
     }//GEN-LAST:event_menuAjudaMenuSelected
+
+    private void buttonAtualizar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAtualizar1ActionPerformed
+        if (tabela.getSelectedRowCount() > 0) {
+            int linhaSelecionada = tabela.getSelectedRow();
+            int colunaPID = 1;
+
+            int processoSelecionadoPID = Integer.parseInt((String) tabela.getValueAt(linhaSelecionada, colunaPID));
+            GerenciadorDeProcessos.encerrarProcesso(processoSelecionadoPID);
+        }
+    }//GEN-LAST:event_buttonAtualizar1ActionPerformed
 
     public static void main(String args[]) {
         try {
@@ -1235,9 +1247,9 @@ public class JFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar barraDeMenu;
     private javax.swing.JButton buttonAtualizar;
+    private javax.swing.JButton buttonAtualizar1;
     private javax.swing.JMenu menuAjuda;
     private javax.swing.JMenuItem menuEncerrar;
-    private javax.swing.JPanel panel;
     private javax.swing.JPopupMenu popupProcesso;
     private javax.swing.JScrollPane scroll;
     private javax.swing.JTable tabela;
