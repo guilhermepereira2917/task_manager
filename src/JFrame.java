@@ -1,8 +1,7 @@
 
+import guia.FrameGuia;
 import java.awt.Point;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.SwingUtilities;
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
@@ -10,6 +9,8 @@ import javax.swing.table.DefaultTableModel;
 
 public class JFrame extends javax.swing.JFrame {
 
+    FrameGuia frameGuia;
+    
     public JFrame() {
         initComponents();
 
@@ -27,7 +28,9 @@ public class JFrame extends javax.swing.JFrame {
                 }
             }
         }.start();
-
+        
+        frameGuia = new FrameGuia(this);
+        
     }
 
     public synchronized void atualizar() {
@@ -68,7 +71,6 @@ public class JFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gerenciador de Processos");
-        setResizable(false);
 
         buttonAtualizar.setText("Atualizar");
         buttonAtualizar.addActionListener(new java.awt.event.ActionListener() {
