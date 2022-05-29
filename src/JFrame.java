@@ -1,22 +1,44 @@
 
+import java.awt.Point;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.SwingUtilities;
+import javax.swing.event.PopupMenuEvent;
+import javax.swing.event.PopupMenuListener;
 import javax.swing.table.DefaultTableModel;
 
 public class JFrame extends javax.swing.JFrame {
 
     public JFrame() {
         initComponents();
-        
-        atualizar();
+
+        // Thread que atualiza os processo na tela
+        new Thread() {
+            @Override
+            public void run() {
+                while (true) {
+                    try {
+                        atualizar();
+                        sleep(1000);
+                    } catch (InterruptedException ex) {
+                        ex.printStackTrace();
+                    }
+                }
+            }
+        }.start();
+
     }
 
-    public void atualizar() {
-        GerenciadorDeProcessos gerenciador = new GerenciadorDeProcessos();
-        ArrayList<ArrayList<Object>> processos = gerenciador.retornarProcessos();
+    public synchronized void atualizar() {
+        ArrayList<ArrayList<Object>> processos = GerenciadorDeProcessos.retornarProcessos();
 
         DefaultTableModel tableModel = (DefaultTableModel) tabela.getModel();
         tableModel.setRowCount(processos.size());
         tabela.setModel(tableModel);
+
+        setupPopup();
+        tabela.setComponentPopupMenu(popupProcesso);
 
         for (int i = 0; i < processos.size(); i++) {
             for (int j = 0; j < processos.get(i).size(); j++) {
@@ -29,10 +51,20 @@ public class JFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        popupProcesso = new javax.swing.JPopupMenu();
+        menuEncerrar = new javax.swing.JMenuItem();
         buttonAtualizar = new javax.swing.JButton();
         panel = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        scroll = new javax.swing.JScrollPane();
         tabela = new javax.swing.JTable();
+
+        menuEncerrar.setText("Encerrar");
+        menuEncerrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuEncerrarActionPerformed(evt);
+            }
+        });
+        popupProcesso.add(menuEncerrar);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gerenciador de Processos");
@@ -44,8 +76,6 @@ public class JFrame extends javax.swing.JFrame {
                 buttonAtualizarActionPerformed(evt);
             }
         });
-
-        panel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         tabela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1062,18 +1092,18 @@ public class JFrame extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tabela);
+        scroll.setViewportView(tabela);
 
         javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
         panel.setLayout(panelLayout);
         panelLayout.setHorizontalGroup(
             panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 618, Short.MAX_VALUE)
+            .addComponent(scroll, javax.swing.GroupLayout.DEFAULT_SIZE, 620, Short.MAX_VALUE)
         );
         panelLayout.setVerticalGroup(
             panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelLayout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(scroll, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -1108,15 +1138,15 @@ public class JFrame extends javax.swing.JFrame {
         atualizar();
     }//GEN-LAST:event_buttonAtualizarActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void menuEncerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuEncerrarActionPerformed
+        int linhaSelecionada = tabela.getSelectedRow();
+        int colunaPID = 1;
+
+        int processoSelecionadoPID = Integer.parseInt((String) tabela.getValueAt(linhaSelecionada, colunaPID));
+        GerenciadorDeProcessos.encerrarProcesso(processoSelecionadoPID);
+    }//GEN-LAST:event_menuEncerrarActionPerformed
+
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -1133,9 +1163,7 @@ public class JFrame extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(JFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
 
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new JFrame().setVisible(true);
@@ -1143,10 +1171,42 @@ public class JFrame extends javax.swing.JFrame {
         });
     }
 
+    public void setupPopup() {
+        popupProcesso.addPopupMenuListener(new PopupMenuListener() {
+
+            @Override
+            public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        int rowAtPoint = tabela.rowAtPoint(SwingUtilities.convertPoint(popupProcesso, new Point(0, 0), tabela));
+                        if (rowAtPoint > -1) {
+                            tabela.setRowSelectionInterval(rowAtPoint, rowAtPoint);
+                        }
+                    }
+                });
+            }
+
+            @Override
+            public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
+                // TODO Auto-generated method stub
+
+            }
+
+            @Override
+            public void popupMenuCanceled(PopupMenuEvent e) {
+                // TODO Auto-generated method stub
+
+            }
+        });
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonAtualizar;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JMenuItem menuEncerrar;
     private javax.swing.JPanel panel;
+    private javax.swing.JPopupMenu popupProcesso;
+    private javax.swing.JScrollPane scroll;
     private javax.swing.JTable tabela;
     // End of variables declaration//GEN-END:variables
 }
