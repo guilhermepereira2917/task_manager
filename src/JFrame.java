@@ -60,6 +60,8 @@ public class JFrame extends javax.swing.JFrame {
         panel = new javax.swing.JPanel();
         scroll = new javax.swing.JScrollPane();
         tabela = new javax.swing.JTable();
+        barraDeMenu = new javax.swing.JMenuBar();
+        menuAjuda = new javax.swing.JMenu();
 
         menuEncerrar.setText("Encerrar");
         menuEncerrar.addActionListener(new java.awt.event.ActionListener() {
@@ -1094,6 +1096,11 @@ public class JFrame extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tabela.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabelaMouseClicked(evt);
+            }
+        });
         scroll.setViewportView(tabela);
 
         javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
@@ -1108,6 +1115,20 @@ public class JFrame extends javax.swing.JFrame {
                 .addComponent(scroll, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
+
+        menuAjuda.setText("Ajuda");
+        menuAjuda.addMenuListener(new javax.swing.event.MenuListener() {
+            public void menuCanceled(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuDeselected(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuSelected(javax.swing.event.MenuEvent evt) {
+                menuAjudaMenuSelected(evt);
+            }
+        });
+        barraDeMenu.add(menuAjuda);
+
+        setJMenuBar(barraDeMenu);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -1147,6 +1168,14 @@ public class JFrame extends javax.swing.JFrame {
         int processoSelecionadoPID = Integer.parseInt((String) tabela.getValueAt(linhaSelecionada, colunaPID));
         GerenciadorDeProcessos.encerrarProcesso(processoSelecionadoPID);
     }//GEN-LAST:event_menuEncerrarActionPerformed
+
+    private void tabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaMouseClicked
+        frameGuia.trocarPagina("processo.html");
+    }//GEN-LAST:event_tabelaMouseClicked
+
+    private void menuAjudaMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_menuAjudaMenuSelected
+        frameGuia.trocarPagina("ajuda.html");
+    }//GEN-LAST:event_menuAjudaMenuSelected
 
     public static void main(String args[]) {
         try {
@@ -1204,7 +1233,9 @@ public class JFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuBar barraDeMenu;
     private javax.swing.JButton buttonAtualizar;
+    private javax.swing.JMenu menuAjuda;
     private javax.swing.JMenuItem menuEncerrar;
     private javax.swing.JPanel panel;
     private javax.swing.JPopupMenu popupProcesso;

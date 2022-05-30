@@ -1,0 +1,27 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Para tamnhos, tentar utilizar em pixel, pois o JEditorPane não suporta a medida rem */
+
+body {
+    width: 110%;
+    height: 110%;
+
+    margin: 12px;
+}
+
+img {
+    width: 50%;
+}
+
+ul {
+    list-style: none;
+    list-style-type: none;
+}
+
+li {
+    list-style: none;
+}
