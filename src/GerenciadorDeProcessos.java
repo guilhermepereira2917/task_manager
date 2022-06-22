@@ -9,7 +9,7 @@ public class GerenciadorDeProcessos {
 
     public static ArrayList<ArrayList<Object>> retornarProcessos() {
         try {
-            Process process = Runtime.getRuntime().exec("tasklist /NH /FO csv");
+            Process process = Runtime.getRuntime().exec("tasklist /V /NH /FO csv");
             BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
 
             ArrayList<ArrayList<Object>> processos = new ArrayList();
@@ -20,14 +20,16 @@ public class GerenciadorDeProcessos {
 
                 // Remove as aspas duplas
                 dados[0] = dados[0].substring(1, dados[0].length());
-                dados[4] = dados[4].substring(0, dados[4].length() - 1);
+                // dados[4] = dados[4].substring(0, dados[4].length() - 1);
 
                 ArrayList<Object> dadosFinais = new ArrayList();
-                dadosFinais.add(dados[0]);
-                dadosFinais.add(dados[1]);
-                dadosFinais.add(dados[2]);
-                dadosFinais.add(dados[3]);
-                dadosFinais.add(dados[4]);
+                dadosFinais.add(dados[1]); // Nome
+                dadosFinais.add(dados[0]); // PID
+                dadosFinais.add(dados[7]); // CPU
+                dadosFinais.add(dados[4]); // Memória
+                dadosFinais.add(dados[2]); // Sessão
+                dadosFinais.add(dados[6]); // Status
+                dadosFinais.add(dados[5]); // Usuário
 
                 for (int i = 0; i < dadosFinais.size(); i++) {
                     String dado = (String) dadosFinais.get(i);

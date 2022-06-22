@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+    <h1>Lista de processos</h1>
+    <hr>
+    <p>
+        Aqui está uma lista de processos, para mostrá-la na tela, o Java basicamente roda o comando
+        '<b>tasklist /V /NH /FO csv</b>' e consome seu conteúdo para exibí-lo na tela.
+    </p>
+    <p>
+        Explicando o comando em partes: <b>tasklist</b> é o comando em si, que pede ao Windows quais processos estão rodando neste exato momento,
+        <b>/V</b> é o parametro que pede ao comando para ser verboso, no caso, apresentar mais opções do que ele normalmente apresentaria (como Estado do Processo e tempo de CPU)
+        <b>/NH</b> é um parametro que pede para que o cabeçalho de identificação das colunas não seja mostrado, e o parametro <b>/FO csv</b> pede
+        para que o comando seja formatado no padrão CSV, para ficar mais fácil de consumir seu conteúdo.
+    </p>
+    <p>
+        Este comando é chamado uma vez a cada segundo por uma Thread, ao mesmo tempo que permite com que
+        seja interagido com a interface.
+    </p>
+    <br>
+    <p>
+        Clique no cabeçalho das colunas para saber mais sobre cada um dos campos.
+    </p>
+    <p>
+        Clique com o botão direito em um processo para encerrá-lo ou visualizar suas propriedades, ou tentar, pelo menos.
+    </p>
+</body>
+
+</html>

@@ -17,8 +17,6 @@ public class FrameGuia extends JInternalFrame {
         setTitle("Ajuda");
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 
-        // setLocation((int) frame.getLocation().getX() + frame.getWidth() - 10, (int) frame.getLocation().getY());
-
         editorPane = new JEditorPane();
         editorPane.setEditable(false);
 

@@ -1,20 +1,29 @@
 
 import guia.FrameGuia;
 
-
 public class DesktopFrame extends javax.swing.JFrame {
 
     FrameGuia frameGuia;
-    
+
     public DesktopFrame() {
         initComponents();
-        
+
         frameGuia = new FrameGuia();
+
+        // Coloca frame guia em cima na direita
+        frameGuia.setLocation((getSize().width - frameGuia.getSize().width) - 10, 0);
+
         frameGuia.setVisible(true);
-        
+
         FrameProcessos frameProcessos = new FrameProcessos(frameGuia);
+
+        // Centraliza frame processos
+        frameProcessos.setLocation(
+                (getSize().width - frameProcessos.getSize().width) / 2,
+                (getSize().height - frameProcessos.getSize().height) / 2
+        );
         frameProcessos.setVisible(true);
-        
+
         jDesktopPane1.add(frameProcessos);
         jDesktopPane1.add(frameGuia);
     }
@@ -28,6 +37,7 @@ public class DesktopFrame extends javax.swing.JFrame {
         menuAjuda = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Gerenciador de Processos");
         setResizable(false);
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
