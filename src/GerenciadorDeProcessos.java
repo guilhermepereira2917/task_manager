@@ -3,6 +3,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class GerenciadorDeProcessos {
 
@@ -52,4 +53,15 @@ public class GerenciadorDeProcessos {
         }
     }
 
+    public static PropriedadesProcesso retornarPropriedadesProcesso(int pid, String nome) {
+        Optional<ProcessHandle> optional = ProcessHandle.of(pid);
+        
+        if (optional.isEmpty()) {
+            return null;
+        }
+        
+        PropriedadesProcesso propriedadesProcesso = new PropriedadesProcesso(nome, pid, ((ProcessHandle) optional.get()).info());
+        return propriedadesProcesso;
+    }
+    
 }

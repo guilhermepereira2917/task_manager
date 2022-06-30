@@ -5,18 +5,19 @@ import java.io.IOException;
 
 import javax.swing.JEditorPane;
 import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
 import javax.swing.JScrollPane;
 
-public class FrameGuia extends JFrame {
+public class FrameGuia extends JInternalFrame {
 
     JEditorPane editorPane;
 
-    public FrameGuia(JFrame frame) {
+    public FrameGuia() {
         super();
         setTitle("Ajuda");
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 
-        setLocation((int) frame.getLocation().getX() + frame.getWidth() - 10, (int) frame.getLocation().getY());
+        // setLocation((int) frame.getLocation().getX() + frame.getWidth() - 10, (int) frame.getLocation().getY());
 
         editorPane = new JEditorPane();
         editorPane.setEditable(false);
@@ -35,6 +36,8 @@ public class FrameGuia extends JFrame {
 
         add(editorScrollPane);
         setVisible(true);
+        
+        setIconifiable(true);
     }
 
     public void trocarPagina(String url) {

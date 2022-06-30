@@ -1,19 +1,22 @@
 
 import guia.FrameGuia;
 import java.awt.Point;
+import static java.lang.Thread.sleep;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
 import javax.swing.table.DefaultTableModel;
 
-public class JFrame extends javax.swing.JFrame {
+public class FrameProcessos extends javax.swing.JInternalFrame {
 
     FrameGuia frameGuia;
-    
-    public JFrame() {
+    public FrameProcessos(FrameGuia frameGuia) {
         initComponents();
-
+        
+        this.frameGuia = frameGuia;
+        
         // Thread que atualiza os processo na tela
         new Thread() {
             @Override
@@ -28,9 +31,6 @@ public class JFrame extends javax.swing.JFrame {
                 }
             }
         }.start();
-        
-        frameGuia = new FrameGuia(this);
-        
     }
 
     public synchronized void atualizar() {
@@ -49,19 +49,33 @@ public class JFrame extends javax.swing.JFrame {
             }
         }
     }
+    
+    public int retornaPIDSelecionado() {
+        int linhaSelecionada = tabela.getSelectedRow();
+        int colunaPID = 1;
 
+        return Integer.parseInt((String) tabela.getValueAt(linhaSelecionada, colunaPID));
+    }
+   
+    public String retornaNomeSelecionado() {
+        int linhaSelecionada = tabela.getSelectedRow();
+        int colunaNome = 0;
+
+        return (String) tabela.getValueAt(linhaSelecionada, colunaNome);
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         popupProcesso = new javax.swing.JPopupMenu();
         menuEncerrar = new javax.swing.JMenuItem();
+        menuPropriedades = new javax.swing.JMenuItem();
         buttonAtualizar = new javax.swing.JButton();
         panel = new javax.swing.JPanel();
         scroll = new javax.swing.JScrollPane();
         tabela = new javax.swing.JTable();
         barraDeMenu = new javax.swing.JMenuBar();
-        menuAjuda = new javax.swing.JMenu();
 
         menuEncerrar.setText("Encerrar");
         menuEncerrar.addActionListener(new java.awt.event.ActionListener() {
@@ -71,8 +85,16 @@ public class JFrame extends javax.swing.JFrame {
         });
         popupProcesso.add(menuEncerrar);
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Gerenciador de Processos");
+        menuPropriedades.setText("Propriedades");
+        menuPropriedades.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuPropriedadesActionPerformed(evt);
+            }
+        });
+        popupProcesso.add(menuPropriedades);
+
+        setIconifiable(true);
+        setTitle("Lista de Processos");
 
         buttonAtualizar.setText("Atualizar");
         buttonAtualizar.addActionListener(new java.awt.event.ActionListener() {
@@ -1107,7 +1129,7 @@ public class JFrame extends javax.swing.JFrame {
         panel.setLayout(panelLayout);
         panelLayout.setHorizontalGroup(
             panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(scroll, javax.swing.GroupLayout.DEFAULT_SIZE, 620, Short.MAX_VALUE)
+            .addComponent(scroll, javax.swing.GroupLayout.DEFAULT_SIZE, 625, Short.MAX_VALUE)
         );
         panelLayout.setVerticalGroup(
             panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1115,18 +1137,6 @@ public class JFrame extends javax.swing.JFrame {
                 .addComponent(scroll, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
-
-        menuAjuda.setText("Ajuda");
-        menuAjuda.addMenuListener(new javax.swing.event.MenuListener() {
-            public void menuCanceled(javax.swing.event.MenuEvent evt) {
-            }
-            public void menuDeselected(javax.swing.event.MenuEvent evt) {
-            }
-            public void menuSelected(javax.swing.event.MenuEvent evt) {
-                menuAjudaMenuSelected(evt);
-            }
-        });
-        barraDeMenu.add(menuAjuda);
 
         setJMenuBar(barraDeMenu);
 
@@ -1154,53 +1164,34 @@ public class JFrame extends javax.swing.JFrame {
         );
 
         pack();
-        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAtualizarActionPerformed
         atualizar();
     }//GEN-LAST:event_buttonAtualizarActionPerformed
 
-    private void menuEncerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuEncerrarActionPerformed
-        int linhaSelecionada = tabela.getSelectedRow();
-        int colunaPID = 1;
-
-        int processoSelecionadoPID = Integer.parseInt((String) tabela.getValueAt(linhaSelecionada, colunaPID));
-        GerenciadorDeProcessos.encerrarProcesso(processoSelecionadoPID);
-    }//GEN-LAST:event_menuEncerrarActionPerformed
-
     private void tabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaMouseClicked
         frameGuia.trocarPagina("processo.html");
     }//GEN-LAST:event_tabelaMouseClicked
 
-    private void menuAjudaMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_menuAjudaMenuSelected
-        frameGuia.trocarPagina("ajuda.html");
-    }//GEN-LAST:event_menuAjudaMenuSelected
+    private void menuEncerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuEncerrarActionPerformed
+        GerenciadorDeProcessos.encerrarProcesso(retornaPIDSelecionado());
+    }//GEN-LAST:event_menuEncerrarActionPerformed
 
-    public static void main(String args[]) {
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    private void menuPropriedadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuPropriedadesActionPerformed
+        PropriedadesProcesso propriedadesProcesso = 
+                GerenciadorDeProcessos.retornarPropriedadesProcesso(retornaPIDSelecionado(), retornaNomeSelecionado());
+
+        if (propriedadesProcesso == null) {
+            JOptionPane.showMessageDialog(this, "Não é possível abrir as propriedades desse processo.", "Processo Inválido", JOptionPane.ERROR_MESSAGE);
+            return;
         }
 
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new JFrame().setVisible(true);
-            }
-        });
-    }
+        FramePropriedades framePropriedades = new FramePropriedades(propriedadesProcesso);
+        framePropriedades.setVisible(true);
+        
+        getParent().add(framePropriedades);
+    }//GEN-LAST:event_menuPropriedadesActionPerformed
 
     public void setupPopup() {
         popupProcesso.addPopupMenuListener(new PopupMenuListener() {
@@ -1232,11 +1223,12 @@ public class JFrame extends javax.swing.JFrame {
         });
     }
 
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar barraDeMenu;
     private javax.swing.JButton buttonAtualizar;
-    private javax.swing.JMenu menuAjuda;
     private javax.swing.JMenuItem menuEncerrar;
+    private javax.swing.JMenuItem menuPropriedades;
     private javax.swing.JPanel panel;
     private javax.swing.JPopupMenu popupProcesso;
     private javax.swing.JScrollPane scroll;
