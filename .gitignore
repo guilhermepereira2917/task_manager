@@ -3,4 +3,5 @@ nbproject/
 test/
 build.xml
 manifest.mf
-/dist/
+dist/README.TXT
+

@@ -72,8 +72,7 @@ public class FrameProcessos extends javax.swing.JInternalFrame {
         menuEncerrar = new javax.swing.JMenuItem();
         menuPropriedades = new javax.swing.JMenuItem();
         buttonAtualizar = new javax.swing.JButton();
-        panel = new javax.swing.JPanel();
-        scroll = new javax.swing.JScrollPane();
+        scroll1 = new javax.swing.JScrollPane();
         tabela = new javax.swing.JTable();
         barraDeMenu = new javax.swing.JMenuBar();
 
@@ -1123,20 +1122,7 @@ public class FrameProcessos extends javax.swing.JInternalFrame {
                 tabelaMouseClicked(evt);
             }
         });
-        scroll.setViewportView(tabela);
-
-        javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
-        panel.setLayout(panelLayout);
-        panelLayout.setHorizontalGroup(
-            panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(scroll, javax.swing.GroupLayout.DEFAULT_SIZE, 625, Short.MAX_VALUE)
-        );
-        panelLayout.setVerticalGroup(
-            panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelLayout.createSequentialGroup()
-                .addComponent(scroll, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
+        scroll1.setViewportView(tabela);
 
         setJMenuBar(barraDeMenu);
 
@@ -1147,18 +1133,18 @@ public class FrameProcessos extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(buttonAtualizar))
-                    .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(scroll1, javax.swing.GroupLayout.DEFAULT_SIZE, 620, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(scroll1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(buttonAtualizar)
                 .addContainerGap())
         );
@@ -1229,9 +1215,8 @@ public class FrameProcessos extends javax.swing.JInternalFrame {
     private javax.swing.JButton buttonAtualizar;
     private javax.swing.JMenuItem menuEncerrar;
     private javax.swing.JMenuItem menuPropriedades;
-    private javax.swing.JPanel panel;
     private javax.swing.JPopupMenu popupProcesso;
-    private javax.swing.JScrollPane scroll;
+    private javax.swing.JScrollPane scroll1;
     private javax.swing.JTable tabela;
     // End of variables declaration//GEN-END:variables
 }
