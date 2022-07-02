@@ -111,7 +111,6 @@ public class FrameProcessos extends javax.swing.JInternalFrame {
         popupProcesso = new javax.swing.JPopupMenu();
         menuEncerrar = new javax.swing.JMenuItem();
         menuPropriedades = new javax.swing.JMenuItem();
-        buttonAtualizar = new javax.swing.JButton();
         scroll1 = new javax.swing.JScrollPane();
         tabela = new javax.swing.JTable();
         jInternalFrame1 = new javax.swing.JInternalFrame();
@@ -138,14 +137,8 @@ public class FrameProcessos extends javax.swing.JInternalFrame {
         popupProcesso.add(menuPropriedades);
 
         setIconifiable(true);
+        setResizable(true);
         setTitle("Lista de Processos");
-
-        buttonAtualizar.setText("Atualizar");
-        buttonAtualizar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonAtualizarActionPerformed(evt);
-            }
-        });
 
         tabela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -236,11 +229,7 @@ public class FrameProcessos extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(buttonAtualizar))
-                    .addComponent(scroll1, javax.swing.GroupLayout.DEFAULT_SIZE, 854, Short.MAX_VALUE))
+                .addComponent(scroll1, javax.swing.GroupLayout.DEFAULT_SIZE, 854, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
@@ -252,23 +241,17 @@ public class FrameProcessos extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(scroll1, javax.swing.GroupLayout.DEFAULT_SIZE, 343, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(buttonAtualizar)
+                .addComponent(scroll1, javax.swing.GroupLayout.DEFAULT_SIZE, 362, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 191, Short.MAX_VALUE)
+                    .addGap(0, 187, Short.MAX_VALUE)
                     .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 192, Short.MAX_VALUE)))
+                    .addGap(0, 187, Short.MAX_VALUE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void buttonAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAtualizarActionPerformed
-        atualizar();
-    }//GEN-LAST:event_buttonAtualizarActionPerformed
 
     private void tabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaMouseClicked
         frameGuia.trocarPagina("lista.html");
@@ -336,7 +319,6 @@ public class FrameProcessos extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar barraDeMenu;
     private javax.swing.JMenuBar barraDeMenu1;
-    private javax.swing.JButton buttonAtualizar;
     private javax.swing.JButton buttonAtualizar1;
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JMenuItem menuEncerrar;

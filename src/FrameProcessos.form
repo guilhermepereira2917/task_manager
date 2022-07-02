@@ -31,6 +31,7 @@
   </NonVisualComponents>
   <Properties>
     <Property name="iconifiable" type="boolean" value="true"/>
+    <Property name="resizable" type="boolean" value="true"/>
     <Property name="title" type="java.lang.String" value="Lista de Processos"/>
   </Properties>
   <SyntheticProperties>
@@ -54,13 +55,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      <Component id="buttonAtualizar" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Component id="scroll1" alignment="0" pref="854" max="32767" attributes="0"/>
-              </Group>
+              <Component id="scroll1" pref="854" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
@@ -76,30 +71,20 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="scroll1" pref="343" max="32767" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="buttonAtualizar" min="-2" max="-2" attributes="0"/>
+              <Component id="scroll1" pref="362" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <EmptySpace min="0" pref="191" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="187" max="32767" attributes="0"/>
                   <Component id="jInternalFrame1" min="-2" pref="0" max="-2" attributes="0"/>
-                  <EmptySpace min="0" pref="192" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="187" max="32767" attributes="0"/>
               </Group>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JButton" name="buttonAtualizar">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Atualizar"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonAtualizarActionPerformed"/>
-      </Events>
-    </Component>
     <Container class="javax.swing.JScrollPane" name="scroll1">
       <AuxValues>
         <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
