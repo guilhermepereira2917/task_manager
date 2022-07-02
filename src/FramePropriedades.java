@@ -17,6 +17,9 @@ public class FramePropriedades extends javax.swing.JInternalFrame {
         this.infoProcesso = propriedadesProcesso.getPropriedades();
 
         atualizar();
+        
+        requestFocusInWindow();
+        DesktopFrame.frameGuia.trocarPagina("propriedades.html");
     }
 
     final public void atualizar() {
@@ -127,24 +130,66 @@ public class FramePropriedades extends javax.swing.JInternalFrame {
 
         txtPID.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         txtPID.setText("PID:");
+        txtPID.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        txtPID.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtPIDMouseClicked(evt);
+            }
+        });
 
         txtNome.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         txtNome.setText("Nome:");
+        txtNome.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        txtNome.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtNomeMouseClicked(evt);
+            }
+        });
 
         txtArgumentos.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         txtArgumentos.setText("Argumentos:");
+        txtArgumentos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        txtArgumentos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtArgumentosMouseClicked(evt);
+            }
+        });
 
         txtExecutavel.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         txtExecutavel.setText("Caminho do Executável:");
+        txtExecutavel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        txtExecutavel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtExecutavelMouseClicked(evt);
+            }
+        });
 
         txtTempo.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         txtTempo.setText("Instante do Início:");
+        txtTempo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        txtTempo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtTempoMouseClicked(evt);
+            }
+        });
 
         txtCPU.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         txtCPU.setText("Tempo de CPU:");
+        txtCPU.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        txtCPU.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtCPUMouseClicked(evt);
+            }
+        });
 
         txtUsuario.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         txtUsuario.setText("Usuário:");
+        txtUsuario.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        txtUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtUsuarioMouseClicked(evt);
+            }
+        });
 
         labelPID.setText("PID:");
 
@@ -250,6 +295,34 @@ public class FramePropriedades extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txtPIDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtPIDMouseClicked
+        DesktopFrame.frameGuia.trocarPagina("pid.html");
+    }//GEN-LAST:event_txtPIDMouseClicked
+
+    private void txtNomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtNomeMouseClicked
+        DesktopFrame.frameGuia.trocarPagina("nome.html");
+    }//GEN-LAST:event_txtNomeMouseClicked
+
+    private void txtCPUMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtCPUMouseClicked
+       DesktopFrame.frameGuia.trocarPagina("cpu.html");
+    }//GEN-LAST:event_txtCPUMouseClicked
+
+    private void txtUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtUsuarioMouseClicked
+        DesktopFrame.frameGuia.trocarPagina("sessao.html");
+    }//GEN-LAST:event_txtUsuarioMouseClicked
+
+    private void txtArgumentosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtArgumentosMouseClicked
+        DesktopFrame.frameGuia.trocarPagina("argumentos.html");
+    }//GEN-LAST:event_txtArgumentosMouseClicked
+
+    private void txtExecutavelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtExecutavelMouseClicked
+        DesktopFrame.frameGuia.trocarPagina("caminho.html");
+    }//GEN-LAST:event_txtExecutavelMouseClicked
+
+    private void txtTempoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtTempoMouseClicked
+        DesktopFrame.frameGuia.trocarPagina("inicio.html");
+    }//GEN-LAST:event_txtTempoMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

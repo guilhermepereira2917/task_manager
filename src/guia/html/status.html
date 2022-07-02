@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+    <h1>Estados de um Processo</h1>
+    <hr>
+    <p>
+        Os processos nunca são executados 100% do tempo pelo processador, pois não existe lugar para todo
+        mundo,
+        e por isso,
+        estão sempre "brigando" pelo seu tempo e pedaço de hardware.
+    </p>
+
+    <br>
+    <center>
+        <img src="../img/processo.png" width="450">
+    </center>
+    <br>
+
+    <p>
+        Como pode ser visto acima, um processo sempre está em um de 3 estados, quem determina os estados de
+        um
+        processo, é o escalonador.
+    </p>
+
+    <h2>Rodando</h2>
+    <p>Quando um processo está rodando, ele está, rodando... Ou seja, está consumindo seu tempo de CPU naquele instante</p>
+
+    <h2>Esperando</h2>
+    <p>
+        Quando um processo está esperando, ele está aguardando os outros processos terminarem de
+        rodar,
+        para assim chegar na sua vez de rodar.
+    </p>
+
+    <h2>Bloqueado</h2>
+    <p>
+        Quando um processo está bloqueado, ele está esperando por I/O, ou seja, o sistema liberar
+        recursos de entrada ou de saída,
+        como por exemplo, a leitura de um dado no teclado, ou o liberamento do monitor para poder
+        exibir
+        algo na tela, etc.
+    </p>
+
+    <p>
+        Estes estados, na realidade, alternam centenas de vezes por segundo, e portanto, o que você está vendo na tela não é exatamente o que está acontecendo na CPU, por exemplo,
+        existem vários processo que ficam com o status de Rodando infinitamente, porém, na CPU ele provavelmente seu estado fica alternando entre Rodando e algum outro.
+        (Se as informações realmente atualizassem em tempo real, nosso olho nem seria capaz de acompanhar).
+    </p>
+</body>
+
+</html>

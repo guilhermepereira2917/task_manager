@@ -56,6 +56,12 @@ public class FrameProcessos extends javax.swing.JInternalFrame {
                         case 3:
                             pagina = "memoria.html";
                             break;
+                        case 4, 5:
+                            pagina = "sessao.html";
+                            break;
+                        case 6:
+                            pagina = "status.html";
+                            break;
                     }
                     
                     if (pagina == null)
@@ -270,6 +276,7 @@ public class FrameProcessos extends javax.swing.JInternalFrame {
 
     private void menuEncerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuEncerrarActionPerformed
         GerenciadorDeProcessos.encerrarProcesso(retornaPIDSelecionado());
+        frameGuia.trocarPagina("encerrar.html");
     }//GEN-LAST:event_menuEncerrarActionPerformed
 
     private void menuPropriedadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuPropriedadesActionPerformed

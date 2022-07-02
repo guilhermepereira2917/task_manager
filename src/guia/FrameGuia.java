@@ -24,7 +24,7 @@ public class FrameGuia extends JInternalFrame {
 
         JScrollPane editorScrollPane = new JScrollPane(editorPane);
         editorScrollPane.setVerticalScrollBarPolicy(
-                JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+                JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         editorScrollPane.setHorizontalScrollBarPolicy(
                 JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         editorScrollPane.setPreferredSize(new Dimension(500, 600));

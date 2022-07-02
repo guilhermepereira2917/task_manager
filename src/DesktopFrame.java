@@ -3,7 +3,7 @@ import guia.FrameGuia;
 
 public class DesktopFrame extends javax.swing.JFrame {
 
-    FrameGuia frameGuia;
+    static FrameGuia frameGuia;
 
     public DesktopFrame() {
         initComponents();
