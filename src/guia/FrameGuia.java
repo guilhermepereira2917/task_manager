@@ -19,6 +19,7 @@ public class FrameGuia extends JInternalFrame {
 
         editorPane = new JEditorPane();
         editorPane.setEditable(false);
+        editorPane.setContentType("text/html; charset=UTF-8");
 
         trocarPagina("ajuda.html");
 
